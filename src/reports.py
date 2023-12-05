@@ -5,6 +5,8 @@ from src.analysis import detailed_analysis
 
 router = APIRouter()
 
+filename = "ReportesFuchibol.csv"
+
 @router.get("/reports")
 def generate_report():
     try:
@@ -16,21 +18,16 @@ def generate_report():
         execution_time = analysis_result.get("execution", {}).get("execution_time", "")
         model_used = "DistilBERT" 
 
-        current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        filename = f"ReportesFuchibol_{current_datetime}.csv"
-        filename = filename.replace(":", "_")  
-
-        with open(filename, mode='w', newline='', encoding='utf-8') as file:
+        with open(filename, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
 
-            writer.writerow(["Filename", "Sentiment Label", "Sentiment Score", 
-                             "Match Result", "Execution Time", "Model Used"])
-
-            writer.writerow([filename, sentiment_label, sentiment_score, 
+            # Agregar una nueva fila al archivo CSV
+            writer.writerow([current_datetime, sentiment_label, sentiment_score, 
                              match_result, execution_time, model_used])
 
-        return {"message": f"Report generated successfully: {filename}"}
+        return {"message": f"Report updated successfully in {filename}"}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
