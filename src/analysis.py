@@ -16,14 +16,14 @@ nlp = spacy.load("es_core_news_md")
 @router.post("/analysis")
 def detailed_analysis(text: str):
     """
-    Endpoint para inferencia de análisis sintáctico y de sentimiento.
+    Aqui veremos inferencia de análisis sintáctico y de sentimiento.
     """
     try:
         doc = nlp(text)
         result = sentiment_analyzer(text)
 
-        result_keywords = ["ganaron", "victoria", "triunfo", "gano", "triunfaron"]
-        lost_keywords = ["perdieron", "derrota", "perdedor", "perdio", "derrotaron", "no"]
+        result_keywords = ["ganaron", "victoria", "triunfo", "gano", "triunfaron", "derrotaron", "vencieron"]
+        lost_keywords = ["perdieron", "derrota", "perdedor", "perdio", "cayeron", "no", "cayo"]
 
         result_keywords += get_synonyms(result_keywords)
         lost_keywords += get_synonyms(lost_keywords)

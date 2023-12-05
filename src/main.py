@@ -32,13 +32,13 @@ def get_status():
 
     Analizaremos a fondo, nuestros textos futbolisticos favoritos para ver si nuestro equipo gano o perdio el partido :)
     """
-    return f"Service Name: {_SETTINGS.service_name}, Model Name: Analisis de partidos, Your Name: Richard Rojas, Version: {_SETTINGS.k_revision}"
+    return f"Service Name: {_SETTINGS.service_name}, Modelo: Analisis de partidos, Autor: Richard Rojas, Version: {_SETTINGS.k_revision}"
 
 # Sentimiento
 @app.post("/sentiment")
 def sentiment_analysis(text: str):
     """
-    Endpoint para inferencia de análisis de sentimiento.
+    Aqui analizaremos el sentimiento de nuestros textos. 
     """
     try:
         start_time = datetime.now()
