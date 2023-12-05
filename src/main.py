@@ -1,6 +1,6 @@
 # main.py
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from starlette.middleware.cors import CORSMiddleware
 from src.config import get_settings
 from transformers import pipeline
@@ -63,6 +63,10 @@ def sentiment_analysis(text: str):
         if sentiment_label.lower() == "negative":
             sentiment_score *= -1
 
+        # Calcula el número de caracteres y palabras analizadas
+        num_characters = len(text)
+        num_words = len(text.split())
+
         # Formatea la información de la predicción y ejecución
         prediction_info = {
             "sentiment_label": sentiment_label,
@@ -71,7 +75,8 @@ def sentiment_analysis(text: str):
 
         execution_info = {
             "execution_time": str(execution_time),
-            "other_information": "Otra información relevante sobre la ejecución",
+            "num_characters": num_characters,
+            "num_words": num_words,
         }
 
         # Devuelve la información de la predicción y ejecución

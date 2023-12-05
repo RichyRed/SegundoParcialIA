@@ -34,6 +34,15 @@ def detailed_analysis(text: str):
         if result[0]["label"].lower() == "negative":
             sentiment_score *= -1
 
+        # Agrega POS tagging
+        pos_tags = [(token.text, token.pos_) for token in doc]
+
+        # Agrega Named Entity Recognition (NER)
+        ner_entities = [(ent.text, ent.label_) for ent in doc.ents]
+
+        # Agrega Embedding
+        embedding = [token.vector.tolist() for token in doc]
+
         return {
             "analysis": {
                 "syntax": {
@@ -46,6 +55,9 @@ def detailed_analysis(text: str):
                     "label": result[0]["label"],
                     "score": sentiment_score,
                 },
+                "pos_tags": pos_tags,
+                "ner_entities": ner_entities,
+                "embedding": embedding,
             }
         }
 
