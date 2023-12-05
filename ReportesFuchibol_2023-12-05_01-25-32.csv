@@ -1,0 +1,2 @@
+Filename,Sentiment Label,Sentiment Score,Match Result,Execution Time,Model Used
+ReportesFuchibol_2023-12-05_01-25-32.csv,NEGATIVE,-0.6,EMPATE,,DistilBERT
